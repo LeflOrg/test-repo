@@ -1,0 +1,80 @@
+branches: ['main']
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - preset: conventionalcommits
+      releaseRules:
+        - type: '*!'
+          release: major
+  - - "@semantic-release/release-notes-generator"
+    - preset: conventionalcommits
+  - "@semantic-release/changelog"
+  - "@semantic-release/git"
+  - "@semantic-release/github"
+ci: true
+debug: true
+dryRun: false
+tagFormat: 'v${version}'
+
+#Verify that the following plugins exist before moving forward with release
+verifyConditions:
+  - '@semantic-release/changelog'
+  - '@semantic-release/git'
+  - '@semantic-release/github'
+
+analyzeCommits:
+  - path: 'semantic-release-conventional-commits'
+
+generateNotes:
+  - path: '@semantic-release/release-notes-generator'
+    writerOpts:
+      groupBy: 'type'
+      commitGroupsSort: 'title'
+      commitsSort: 'header'
+    linkCompare: true
+    linkReferences: true
+    parserOpts:
+      # detect JIRA issues in merge commits
+      issuePrefixes: ['VIKINGT-']
+      mergePattern: "^Merge branch '(.*)' into (.*)$"
+      mergeCorrespondence: ['branch_src', 'branch_dst']
+  
+prepare:
+  #Create the change log
+  - path: '@semantic-release/changelog'
+    # Push a release commit, tag and CHANGELOG
+  - path: '@semantic-release/git'
+    message: 'RELEASE: v${nextRelease.version}'
+    assets: ['CHANGELOG.md']
+
+# Responsible for publishing the release.
+publish:
+  - path: '@semantic-release/github'
+
+success:
+  - "@semantic-release/github"
+
+fail:
+  - "@semantic-release/github"
+
+# TODO: similar Teams bot exists
+# success:
+#   - path: 'semantic-release-slack-bot'
+#     # Publish a message about the success to a slack channel
+#     notifyOnSuccess: true
+#     markdownReleaseNotes: false
+#     onSuccessTemplate:
+#       # // example params for mattermost
+#       channel: 'your-channel-name'
+#       text: 'Hello, this is some text :tada:'
+#       attachments:
+#         - color: '#00c100'
+#           title: '$package_name'
+#           title_link: '$repo_url'
+#           pretext: 'This is optional pretext that shows above the attachment.'
+#           text: '$release_notes'
+#           footer: 'version: $npm_package_version'
+
+# fail:
+#   - path: 'semantic-release-slack-bot'
+#     # publish a message about failure to a slack channel
+#     notifyOnFail: true
