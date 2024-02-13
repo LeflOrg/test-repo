@@ -1,0 +1,30 @@
+name: Checkout another repository
+run-name: ${{ github.actor }} is checking out another repository and committing into it 🚀
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    checkout:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'generate token'
+              id: generate_token
+              uses: tibdex/github-app-token@v2
+              with:
+                app_id: ${{ secrets.app_id }}
+                private_key: ${{ secrets.app_pem }}
+
+            - name: Check out code
+              id: checkout
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 1
+                token: ${{ steps.generate_token.outputs.token }}
+                repository: LeflOrg/test-repo2
+
+            - name: run stuff
+              run: |
+                cat readme.md
