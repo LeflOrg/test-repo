@@ -1,3 +1,5 @@
+# [1.1.0](https://github.com/LeflOrg/test-repo/compare/v1.0.0...v1.1.0) (2024-02-13)
+
 # [1.0.0](https://github.com/LeflOrg/test-repo/compare/...v1.0.0) (2024-02-12)
 
 
