@@ -28,8 +28,10 @@ jobs:
             - name: run stuff
               run: |
                 cat readme.md
+                git config user.name github-actions[bot]
+                git config user.email 'github-actions[bot]@users.noreply.github.com'
                 echo 'new line to file' >> readme.md
                 git add readme.md
                 git commit -m 'New automated commit'
                 git push
-                
+
