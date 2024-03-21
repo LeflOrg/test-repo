@@ -38,6 +38,7 @@ jobs:
                 echo ${{ steps.envs.outputs.matrix }}
 
     testi:
+        needs: checkout
         runs-on: ububntu-latest
         strategy:
             fail-fast: false
