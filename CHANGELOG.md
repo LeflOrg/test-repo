@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/LeflOrg/test-repo/compare/v1.1.3...v1.2.0) (2024-03-21)
+
+
+### Features
+
+* asd ([928f988](https://github.com/LeflOrg/test-repo/commit/928f988c8d393d1991d2f585bf0c005ee4084c29))
+
 ## [1.1.3](https://github.com/LeflOrg/test-repo/compare/v1.1.2...v1.1.3) (2024-02-13)
 
 ## [1.1.2](https://github.com/LeflOrg/test-repo/compare/v1.1.1...v1.1.2) (2024-02-13)
