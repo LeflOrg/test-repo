@@ -31,7 +31,7 @@ jobs:
                 env_names=$(jq '.environments[].name' response.json)
                 env_names=$(echo $env_names | sed 's/ /,/g')
                 echo $env_names
-                echo 'matrix={"environments":'[$env_names]'}' >> $GITHUB_OUTPUT
+                echo 'matrix={"environments":[$env_names]}' >> $GITHUB_OUTPUT
 
             - name: debug echo
               run: |
