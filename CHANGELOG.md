@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/LeflOrg/test-repo/compare/v1.2.0...v1.3.0) (2024-03-21)
+
+
+### Features
+
+* test stuff ([49331c0](https://github.com/LeflOrg/test-repo/commit/49331c015788ed0a1f7820c390b170cfc153951c))
+
 # [1.2.0](https://github.com/LeflOrg/test-repo/compare/v1.1.3...v1.2.0) (2024-03-21)
 
 
