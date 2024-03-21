@@ -20,17 +20,16 @@ jobs:
                 private_key: ${{ secrets.app_pem }}
 
             - name: secret masker
-              id: curl
-              run: |
-                curl_return=$(curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ steps.generate_token.outputs.token }}" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/LeflOrg/test-repo/environments)
-                echo "CURL_JSON=$curl_return" >> $GITHUB_OUTPUT
-
-            - name: parse environments
               id: envs
               run: |
-                echo ${{steps.curl.outputs.CURL_JSON}} >> output.json
-                woah=$(jq -r '.environments[].name' test.json)
-                echo "matrix={"environments":'$woah'}" >> $GITHUB_OUTPUT
+                curl -L \
+                -H "Accept: application/vnd.github+json" \
+                -H "Authorization: Bearer ${{ steps.generate_token.outputs.token }}" \
+                -H "X-GitHub-Api-Version: 2022-11-28" \
+                https://api.github.com/repos/LeflOrg/test-repo/environments \
+                -o response.json
+                env_names=$(jq -r '.environments[].name' response.json)
+                echo "matrix={"environments":'$env_names'}" >> $GITHUB_OUTPUT
 
     testi:
         runs-on: ububntu-latest
