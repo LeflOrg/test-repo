@@ -28,9 +28,10 @@ jobs:
                 -H "X-GitHub-Api-Version: 2022-11-28" \
                 https://api.github.com/repos/LeflOrg/test-repo/environments \
                 -o response.json
-                env_names=$(jq -r '.environments[].name' response.json)
+                env_names=$(jq '.environments[].name' response.json)
+                env_names=$(echo $env_names | sed 's/ /,/g')
                 echo $env_names
-                echo "matrix={"environments":'$env_names'}" >> $GITHUB_OUTPUT
+                echo "matrix={"environments":'[$env_names]'}" >> $GITHUB_OUTPUT
 
     testi:
         runs-on: ububntu-latest
