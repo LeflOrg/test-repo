@@ -33,6 +33,10 @@ jobs:
                 echo $env_names
                 echo "matrix={"environments":'[$env_names]'}" >> $GITHUB_OUTPUT
 
+            - name: debug echo
+              run: |
+                echo ${{steps.envs.outputs.matrix}}
+
     testi:
         runs-on: ububntu-latest
         strategy:
