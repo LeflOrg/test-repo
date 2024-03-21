@@ -43,9 +43,10 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{fromJson(needs.checkout.outputs.matrix)}}
-            max-parallel: 1
+            max-parallel: 2
         environment: ${{ matrix.environments }}
         steps:
             - name: test
               run: |
                 echo ${{ matrix.environments }}
+                echo ${{ vars.arvo }}
