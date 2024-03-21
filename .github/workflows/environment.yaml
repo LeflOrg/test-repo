@@ -46,5 +46,5 @@ jobs:
         environment: ${{ matrix.environments }}
         steps:
             - name: test
-              run: |§
+              run: |
                 echo ${{ matrix.environments }}
