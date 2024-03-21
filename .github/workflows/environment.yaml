@@ -39,7 +39,7 @@ jobs:
 
     testi:
         needs: checkout
-        runs-on: ububntu-latest
+        runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix: ${{fromJson(needs.checkout.outputs.matrix)}}
